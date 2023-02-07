@@ -32,7 +32,7 @@ export const sendMail = async (data: TMailData) => {
 
 
     const mail = await transporter.sendMail({
-      from: "studio@pnhd.ru",
+      from: "info@outlook-logistics.ru",
       to: data.to,
       subject: data.subject,
       text: data.payload

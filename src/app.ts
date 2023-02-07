@@ -46,7 +46,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname + '/public')));
 
 mongoose.set('strictQuery', true);
-mongoose.connect(DBURL);
+mongoose.connect(DBURL, { dbName: 'outlook' });
+
 
 
 app.use(requestLogger);
