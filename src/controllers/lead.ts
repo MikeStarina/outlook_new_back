@@ -9,21 +9,28 @@ import { sendMail } from "../utils/mailer";
 
 
 export const createLead = async (req: Request, res: Response, next: NextFunction) => {
+
   const { name, phone } = await req.body;
 
+
+
   try {
+
+    if (!name || !phone) throw ServerError.error400('Некорректные данные в запросе')
     const newLead = await new lead({ name, phone });
+    if (!newLead) throw ServerError.error500('Создать новый лид в базе не удалось')
 
     const payload = `Имя: ${name}, Телефон: ${phone}`;
-
     sendMail({to: 'info@outlook-logistics.ru', subject: 'Новая заявка на звонок', payload})
 
     newLead.save()
 
-    return await res.send({ message: 'заявка отправлена'});
+    return res.status(200).send({ message: 'заявка отправлена'});
+
+
   }
-  catch {
-    next(ServerError.error500());
+  catch (e) {
+    next(e);
   }
 
 

@@ -38,8 +38,6 @@ export const sendMail = async (data: TMailData) => {
       text: data.payload
     })
 
-    //console.log(mail);
-
 
 }
 

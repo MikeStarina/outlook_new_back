@@ -11,31 +11,21 @@ import ServerError from '../utils/server-error-class';
 
 export const createOrder = async (req: Request, res: Response, next: NextFunction) => {
 
-  const orderData = await req.body;
-
-
-  const data = {
-    owner_phone: orderData.owner_phone,
-    to: orderData.to,
-    from: orderData.from,
-    car_type: orderData.car_type
-  }
-
-
-
+  const { owner_phone, to, from } = await req.body;
 
   try {
 
-    let newOrder;
-    newOrder = await new order(data);
+    if (!owner_phone || !to || !from) throw ServerError.error400('Некорректные данные в запросе')
+
+    const newOrder = await new order({ owner_phone, to, from });
+
+    if (!newOrder) throw ServerError.error500('Ошибка сервера при записи в БД')
 
 
+    //Здесь нужно описать логику запроса к АТИ
 
 
-
-
-    const payload = '';
-
+    const payload = `Новый заказ. телефон ${owner_phone}`;
     sendMail({ to: 'info@outlook-logistics.ru', subject: `Новый заказ`, payload});
 
 
@@ -50,8 +40,9 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
     return await res.send({ id: newOrder._id });
 
   }
-  catch {
-    next(ServerError.error400());
+  catch (e) {
+
+    next(e);
 
   }
 

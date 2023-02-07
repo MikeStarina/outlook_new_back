@@ -1,7 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import path from 'path';
-import productRouter from './routes/products';
 import orderRouter from './routes/orders';
 import leadRouter from './routes/lead';
 import { errorHandler } from './middlewares/errors';
@@ -52,7 +51,7 @@ mongoose.connect(DBURL);
 
 app.use(requestLogger);
 
-app.use('/api/features', productRouter);
+
 app.use('/api/orders', orderRouter);
 app.use('/api/leads', leadRouter);
 
