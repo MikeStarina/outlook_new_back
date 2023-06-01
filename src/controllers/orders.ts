@@ -13,13 +13,13 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
 
   //console.log(req.body);
 
-  const { owner_phone, to, from } = await req.body.data;
-  console.log(to);
+  const { phone, to, from, name } = await req.body.data;
+
   try {
 
     /*if (!owner_phone || !to || !from) throw ServerError.error400('Некорректные данные в запросе')*/
 
-    const newOrder = await new order({ owner_phone, to, from });
+    const newOrder = await new order({ owner_phone: phone, to, from });
 
     if (!newOrder) throw ServerError.error500('Ошибка сервера при записи в БД')
 
@@ -27,8 +27,8 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
     //Здесь нужно описать логику запроса к АТИ
 
 
-    const payload = `Новый заказ. телефон ${owner_phone}`;
-    sendMail({ to: 'info@outlook-logistics.ru', subject: `Новый заказ`, payload});
+    const payload = `Новый заказ. Из: ${from}, в: ${to}, телефон ${phone} ${name}`;
+    sendMail({ to: 'info@outlook-logistics.ru', subject: `Новый заказ ${newOrder._id}`, payload});
 
 
 
