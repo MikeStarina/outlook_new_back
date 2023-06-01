@@ -16,7 +16,7 @@ export const createLead = async (req: Request, res: Response, next: NextFunction
 
   try {
 
-    if (!name || !phone) throw ServerError.error400('Некорректные данные в запросе')
+    //if (!name || !phone) throw ServerError.error400('Некорректные данные в запросе')
     const newLead = await new lead({ name, phone });
     if (!newLead) throw ServerError.error500('Создать новый лид в базе не удалось')
 
