@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import path from 'path';
 import orderRouter from './routes/orders';
 import leadRouter from './routes/lead';
+import atiCitySearchRouter from './routes/atiCitySearch';
 import { errorHandler } from './middlewares/errors';
 import { requestLogger, errorLogger } from './middlewares/logger';
 import cors from 'cors';
@@ -33,6 +34,7 @@ const corsOptions = {
 
 export const PORT = parseInt(ENV.parsed!.PORT);
 export const DBURL = ENV.parsed!.DBURL.toString();
+export const ATI_TOKEN = ENV.parsed!.ATI_TOKEN.toString();
 
 
 //console.log(DBURL);
@@ -55,6 +57,7 @@ app.use(requestLogger);
 
 app.use('/api/orders', orderRouter);
 app.use('/api/leads', leadRouter);
+app.use('/api/ati_city_search', atiCitySearchRouter);
 
 
 
