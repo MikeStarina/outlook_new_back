@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { sendMail } from '../utils/mailer';
+import fetch from 'node-fetch';
 import ServerError from '../utils/server-error-class';
 import { ATI_TOKEN } from '../app';
 
@@ -8,8 +8,8 @@ import { ATI_TOKEN } from '../app';
 
 export const atiCitySearch = async (req: Request, res: Response, next: NextFunction) => {
 
-  const { userCity } = await req.body.data;
 
+  const { userCity, direction } = await req.body;
 
   try {
 
@@ -21,14 +21,16 @@ export const atiCitySearch = async (req: Request, res: Response, next: NextFunct
           'Host': ''
         }
       }
-    );
+    )
+
+    const parsedAtiCityData: any = await atiCityData.json();
 
 
-    return await res.send({ cities: atiCityData });
-  }
-  catch (e) {
-
-    next(e);
+    return res.send({ cities: parsedAtiCityData, direction });
 
   }
+  catch(e) {
+    next(e)
+  }
+
 }

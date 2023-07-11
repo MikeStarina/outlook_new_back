@@ -11,24 +11,26 @@ import ServerError from '../utils/server-error-class';
 
 export const createOrder = async (req: Request, res: Response, next: NextFunction) => {
 
-  //console.log(req.body);
+  //console.log(req.body.data);
 
-  const { phone, to, from, name } = await req.body.data;
+  const data = await req.body.data;
 
   try {
 
     /*if (!owner_phone || !to || !from) throw ServerError.error400('Некорректные данные в запросе')*/
 
-    const newOrder = await new order({ owner_phone: phone, to, from });
+    //const newOrder = await new order({ owner_phone: phone, to, from });
 
-    if (!newOrder) throw ServerError.error500('Ошибка сервера при записи в БД')
+    //if (!newOrder) throw ServerError.error500('Ошибка сервера при записи в БД')
 
 
     //Здесь нужно описать логику запроса к АТИ
 
 
-    const payload = `Новый заказ. Из: ${from}, в: ${to}, телефон ${phone} ${name}`;
-    sendMail({ to: 'info@outlook-logistics.ru', subject: `Новый заказ ${newOrder._id}`, payload});
+    const payload = `Новый заказ. Из: ${data.validatedCityFrom.FullName}, в: ${data.validatedCityTo.FullName}, Расстояние: ${data.orderDistance},
+    Тип кузова: ${data.carType.placeholder} (реф: ${data.isRef}),
+    Стоимость заказа:${data.price}  телефон ${data.phone} ${data.name}`;
+    sendMail({ to: 'info@outlook-logistics.ru', subject: `Новый заказ`, payload});
 
 
 
@@ -37,9 +39,9 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
 
 
 
-    newOrder.save();
+    //newOrder.save();
 
-    return await res.send({ id: newOrder._id });
+    //return await res.send({ id: newOrder._id });
 
   }
   catch (e) {
