@@ -8,7 +8,8 @@ import { ATI_TOKEN } from '../app';
 
 export const atiCitySearch = async (req: Request, res: Response, next: NextFunction) => {
 
-  const { userCity } = await req.body.data;
+
+  const { userCity, direction } = await req.body;
 
   try {
 
@@ -25,7 +26,7 @@ export const atiCitySearch = async (req: Request, res: Response, next: NextFunct
     const parsedAtiCityData: any = await atiCityData.json();
 
 
-    return res.send({ cities: parsedAtiCityData });
+    return res.send({ cities: parsedAtiCityData, direction });
 
   }
   catch(e) {
