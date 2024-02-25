@@ -14,7 +14,7 @@ export const atiCitySearch = async (req: Request, res: Response, next: NextFunct
 
   try {
 
-    const atiCityData = await fetch(`https://api.fesco.com/api/v1/lk/offers/fit/locations`, {
+    const atiCityData = await fetch(`https://api.ati.su/v1.0/dictionaries/cities?name=${userCity}&cityNameOnly=true`, {
         method: 'GET',
         headers: {
           'Content-Type': 'Application/json',
