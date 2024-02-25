@@ -10,8 +10,8 @@ import { xmlToInt } from '../utils/xmlResponseToInteger';
 
 export const atiDistanceCalc = async (req: Request, res: Response, next: NextFunction) => {
 
-  const { from, to} = req.body;
-
+  const { from, to } = req.body;
+  console.log(req.body)
 
   try {
 
@@ -31,7 +31,8 @@ export const atiDistanceCalc = async (req: Request, res: Response, next: NextFun
     }).then(res => res.text());
 
 
-
+    console.log(calcData);
+    console.log(xmlToInt(calcData));
 
     return res.send({distance: xmlToInt(calcData)})
 

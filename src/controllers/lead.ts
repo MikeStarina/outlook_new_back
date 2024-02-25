@@ -12,18 +12,18 @@ export const createLead = async (req: Request, res: Response, next: NextFunction
 
   const { name, phone } = await req.body;
 
-
+  console.log(name);
 
   try {
 
     //if (!name || !phone) throw ServerError.error400('Некорректные данные в запросе')
-    const newLead = await new lead({ name, phone });
+    const newLead = new lead({ name, phone });
     if (!newLead) throw ServerError.error500('Создать новый лид в базе не удалось')
 
     const payload = `Имя: ${name}, Телефон: ${phone}`;
-    sendMail({to: 'info@outlook-logistics.ru', subject: 'Новая заявка на звонок', payload})
+    await sendMail({to: 'info@outlook-logistics.ru', subject: 'Новая заявка на звонок', payload})
 
-    newLead.save()
+    await newLead.save()
 
     return res.status(200).send({ message: 'заявка отправлена'});
 

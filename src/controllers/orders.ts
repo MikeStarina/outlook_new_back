@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import order from '../models/order';
 import { sendMail } from '../utils/mailer';
 import ServerError from '../utils/server-error-class';
+import { mailGenerator } from '../utils/mailHtmlTemplate';
 
 
 
@@ -11,7 +12,6 @@ import ServerError from '../utils/server-error-class';
 
 export const createOrder = async (req: Request, res: Response, next: NextFunction) => {
 
-  //console.log(req.body.data);
 
   const data = await req.body.data;
 
@@ -19,17 +19,15 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
 
     /*if (!owner_phone || !to || !from) throw ServerError.error400('Некорректные данные в запросе')*/
 
-    //const newOrder = await new order({ owner_phone: phone, to, from });
+    const newOrder = new order(data);
 
-    //if (!newOrder) throw ServerError.error500('Ошибка сервера при записи в БД')
+    if (!newOrder) throw ServerError.error500('Ошибка сервера при записи в БД')
 
 
     //Здесь нужно описать логику запроса к АТИ
 
 
-    const payload = `Новый заказ. Из: ${data.validatedCityFrom.FullName}, в: ${data.validatedCityTo.FullName}, Расстояние: ${data.orderDistance},
-    Тип кузова: ${data.carType.placeholder} (реф: ${data.isRef}),
-    Стоимость заказа:${data.price}  телефон ${data.phone} ${data.name}`;
+    const payload = mailGenerator(newOrder);
     sendMail({ to: 'info@outlook-logistics.ru', subject: `Новый заказ`, payload});
 
 
