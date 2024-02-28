@@ -25,7 +25,7 @@ const corsOptions = {
     'http://outlook-logistics.ru',
     'https://www.outlook-logistics.ru',
     'http://www.outlook-logistics.ru',
-    'http://localhost:3000',
+    //'http://localhost:3000',
     //'http://localhost:1337',
     //'http://95.163.236.246:1337',
     //'https://95.163.236.246:1337',

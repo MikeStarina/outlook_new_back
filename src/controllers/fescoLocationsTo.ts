@@ -8,13 +8,12 @@ import dayjs from 'dayjs';
 
 
 
-export const fescoBids = async (req: Request, res: Response, next: NextFunction) => {
-
+export const fescoLocationsTo = async (req: Request, res: Response, next: NextFunction) => {
   const date = dayjs().add(5, 'day').format('YYYY-MM-DD');
-  const reqData = req.query;
-
+  const { query } = req;
   try {
-    const response = await fetch(`https://my.fesco.com/api/v2/lk/offers/fit?date=${date}&from=${reqData.from}&to=${reqData.to}&wte=${reqData.wte}&co=COC&feCode=371117`, {
+    if (!query.from) return
+    const cities = await fetch(`https://my.fesco.com/api/v2/lk/offers/fit/locations?isPublicRate=2&date=${date}&from=${query.from}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'Application/json',
@@ -22,9 +21,10 @@ export const fescoBids = async (req: Request, res: Response, next: NextFunction)
           'Host': ''
         }
     })
-    const parsedRes = await response.json();
 
-    return res.send(parsedRes);
+    const parsedCities = await cities.json();
+    console.log('test')
+    return res.send({parsedCities});
   }
   catch(err) {
     console.log(err)

@@ -1,57 +1,23 @@
 import mongoose from "mongoose";
+import { ICity, TFescoLocations, ICarType, TFescoCarTypes } from "../utils/types";
 
 
-interface ICIty {
-    Id2: string,
-    CityId: number,
-    RegionId: number,
-    CountryId: number,
-    FullName: string,
-    ShortName: string,
-    FullNameEng: string,
-    ShortNameEng: string,
-    IsRegionalCenter: boolean,
-    CitySize: number,
-    FiasId: string,
-    Longitude: number,
-    Latitude: number,
-    CityName: string,
-    RegionName: string,
-    CountryName: string,
-    CityNameEng: string,
-    RegionNameEng: string,
-    CountryNameEng: string,
-    CountryCodeName: string,
-    direction: 'to' | 'from',
-}
-
-
-interface ICarType {
-
-    name: string,
-    placeholder: string,
-    options: {
-      ref: boolean
-    },
-    regularBids: { bid: number, bidRef?: number },
-    intraregionBids: { bid: number, bidRef?: number },
-    intraCityBids: { price: number, priceRef?: number }
-
-}
 
 
 export interface IOrder {
-    from: String;
-    to: string;
-    phone: string;
-    name: string;
-    isRef: boolean;
-    price: number;
-    validatedCityTo: ICIty;
-    validatedCityFrom: ICIty;
-    orderDistance: number,
-    distanceType: 'regular' | 'intracity' | 'intraregion',
-    carType: ICarType
+    orderType: string,
+    from: string,
+    to: string,
+    phone: string,
+    name: string,
+    validatedCityTo?: ICity | TFescoLocations,
+    validatedCityFrom?: ICity | TFescoLocations,
+    orderDistance?: number,
+    distanceType?: string,
+    zdCarType?: TFescoCarTypes,
+    carType?: ICarType,
+    isRef?: boolean,
+    price?: number,
 }
 
 

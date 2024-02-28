@@ -9,7 +9,6 @@ import dayjs from 'dayjs';
 
 
 export const fescoCities = async (req: Request, res: Response, next: NextFunction) => {
-  console.log('hello');
   const date = dayjs().add(5, 'day').format('YYYY-MM-DD');
   try {
     const cities = await fetch(`https://my.fesco.com/api/v2/lk/offers/fit/locations?isPublicRate=1&date=${date}&from=`, {

@@ -9,7 +9,7 @@ import { atiDistanceCalc } from "../controllers/atiDistanceCalc";
 const router = Router();
 
 
-router.post('/', atiDistanceCalc);
+router.get('/', atiDistanceCalc);
 
 
 export default router;

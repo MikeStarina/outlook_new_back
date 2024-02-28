@@ -6,7 +6,7 @@ import { fescoBids } from "../controllers/fescoBids";
 const router = Router();
 
 
-router.post('/', fescoBids);
+router.get('/', fescoBids);
 
 
 export default router;
