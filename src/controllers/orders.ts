@@ -20,7 +20,7 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
     /*if (!owner_phone || !to || !from) throw ServerError.error400('Некорректные данные в запросе')*/
 
     const newOrder = new order(body);
-
+    //console.log(newOrder);
     if (!newOrder) throw ServerError.error500('Ошибка сервера при записи в БД')
 
 
@@ -35,7 +35,7 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
 
 
 
-    newOrder.save();
+    //newOrder.save();
 
     return res.send({ id: newOrder._id });
 

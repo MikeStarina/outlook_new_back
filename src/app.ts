@@ -34,8 +34,6 @@ const corsOptions = {
   }
 
 //const date = dayjs().add(5, 'day').format('YYYY-MM-DD');
-//console.log(date);
-//console.log(typeof date);
 
 export const PORT = parseInt(ENV.parsed!.PORT);
 export const DBURL = ENV.parsed!.DBURL.toString();
