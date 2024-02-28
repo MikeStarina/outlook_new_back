@@ -13,20 +13,18 @@ import { mailGenerator } from '../utils/mailHtmlTemplate';
 export const createOrder = async (req: Request, res: Response, next: NextFunction) => {
 
 
-  const data = await req.body.data;
+  const { body } = req;
 
   try {
 
     /*if (!owner_phone || !to || !from) throw ServerError.error400('Некорректные данные в запросе')*/
 
-    const newOrder = new order(data);
+    const newOrder = new order(body);
 
     if (!newOrder) throw ServerError.error500('Ошибка сервера при записи в БД')
 
 
-    //Здесь нужно описать логику запроса к АТИ
-
-
+    //const payload = mailGenerator(newOrder);
     const payload = mailGenerator(newOrder);
     sendMail({ to: 'info@outlook-logistics.ru', subject: `Новый заказ`, payload});
 
@@ -37,9 +35,9 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
 
 
 
-    //newOrder.save();
+    newOrder.save();
 
-    //return await res.send({ id: newOrder._id });
+    return res.send({ id: newOrder._id });
 
   }
   catch (e) {
