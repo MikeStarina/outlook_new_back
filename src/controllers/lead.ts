@@ -12,7 +12,7 @@ export const createLead = async (req: Request, res: Response, next: NextFunction
 
   const { name, phone } = await req.body;
 
-  console.log(name);
+
 
   try {
 

@@ -17,7 +17,7 @@ export const mailGenerator = (order: IOrder) => {
       ${orderType}, ${order.orderDistance ? order.orderDistance : '—'}
   &nbsp;км.</p></td></tr><tr><td align="center" style="padding:20px;Margin:0;font-size:0"><table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" class="es-spacer" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"><tr><td style="padding:0;Margin:0;border-bottom:1px solid #cccccc;background:none;height:1px;width:100%;margin:0px"></td></tr></table></td>
       </tr><tr><td align="left" style="padding:0;Margin:0"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Тип кузова:&nbsp;
-      ${order.orderType === 'FTL' ? order.carType!.name : order.zdCarType?.custom_text}
+      ${order.orderType === 'FTL' ? order.carType?.name : order.zdCarType?.custom_text}
       </p><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Реф(да/нет):&nbsp;
       ${order.orderType === 'ZD' ? '—' : order.isRef ? "да" : "нет"}
   </p></td></tr><tr><td align="center" style="padding:20px;Margin:0;font-size:0"><table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" class="es-spacer" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"><tr><td style="padding:0;Margin:0;border-bottom:1px solid #cccccc;background:none;height:1px;width:100%;margin:0px"></td></tr></table></td>

@@ -23,7 +23,7 @@ export const fescoLocationsTo = async (req: Request, res: Response, next: NextFu
     })
 
     const parsedCities = await cities.json();
-    console.log('test')
+
     return res.send({parsedCities});
   }
   catch(err) {

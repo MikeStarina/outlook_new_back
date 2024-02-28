@@ -27,6 +27,7 @@ export interface IOrder {
 
 
 const orderSchema = new mongoose.Schema<IOrder>({
+    orderType: { type: String, required: true},
     from: { type: String, required: true},
     to: { type: String, required: true },
     phone: { type: String, required: true },
@@ -38,6 +39,7 @@ const orderSchema = new mongoose.Schema<IOrder>({
     orderDistance: { type: Number },
     distanceType: { type: String },
     carType: { type: Object },
+    zdCarType: { type: Object },
 })
 
 
