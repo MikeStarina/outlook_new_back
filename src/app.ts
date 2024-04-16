@@ -53,8 +53,8 @@ app.use(express.urlencoded({ extended: true }));
 console.log(__dirname);
 app.use(express.static(path.join(__dirname + '/../src/public')));
 
-//mongoose.set('strictQuery', true);
-//mongoose.connect(DBURL, { dbName: 'outlook' });
+mongoose.set('strictQuery', true);
+mongoose.connect(DBURL, { dbName: 'outlook' });
 
 
 
