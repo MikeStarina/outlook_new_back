@@ -1,13 +1,17 @@
 import mongoose from "mongoose";
 
 interface ILead {
-  name: string;
+  name?: string;
   phone: string;
+  from?: string;
+  to?: string;
 }
 
 const leadSchema = new mongoose.Schema<ILead>({
-  name: { type: String, required: true, minlength: 2, maxlength: 40 },
+  name: { type: String },
   phone: { type: String, required: true },
+  from: { type: String },
+  to: { type: String },
 });
 
 
