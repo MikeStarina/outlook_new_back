@@ -7,6 +7,8 @@ import atiCitySearchRouter from './routes/atiCitySearch';
 import atiDistanceCalcRouter from './routes/atiDistanceCalc';
 import fescoCitiesRouter from './routes/fescoCities';
 import fescoBidsRouter from './routes/fescoBids';
+import featuresRouter from './routes/features';
+import servicesRouter from './routes/services';
 import { errorHandler } from './middlewares/errors';
 import { requestLogger, errorLogger } from './middlewares/logger';
 import cors from 'cors';
@@ -50,7 +52,6 @@ const app = express();
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
-console.log(__dirname);
 app.use(express.static(path.join(__dirname + '/../src/public')));
 
 mongoose.set('strictQuery', true);
@@ -67,6 +68,8 @@ app.use('/api/ati_city_search', atiCitySearchRouter);
 app.use('/api/ati_distance_calculator', atiDistanceCalcRouter);
 app.use('/api/fescoCities', fescoCitiesRouter);
 app.use('/api/fescoBids', fescoBidsRouter);
+app.use('/api/features', featuresRouter);
+app.use('/api/services', servicesRouter);
 
 
 
