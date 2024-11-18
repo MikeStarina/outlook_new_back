@@ -9,6 +9,7 @@ import fescoCitiesRouter from './routes/fescoCities';
 import fescoBidsRouter from './routes/fescoBids';
 import featuresRouter from './routes/features';
 import servicesRouter from './routes/services';
+import directionsRouter from './routes/directions'
 import { errorHandler } from './middlewares/errors';
 import { requestLogger, errorLogger } from './middlewares/logger';
 import cors from 'cors';
@@ -27,7 +28,7 @@ const corsOptions = {
     'http://outlook-logistics.ru',
     'https://www.outlook-logistics.ru',
     'http://www.outlook-logistics.ru',
-    //'http://localhost:3000',
+    'http://localhost:3000',
     //'http://localhost:1337',
     //'http://95.163.236.246:1337',
     //'https://95.163.236.246:1337',
@@ -70,6 +71,7 @@ app.use('/api/fescoCities', fescoCitiesRouter);
 app.use('/api/fescoBids', fescoBidsRouter);
 app.use('/api/features', featuresRouter);
 app.use('/api/services', servicesRouter);
+app.use('/api/directions', directionsRouter);
 
 
 
